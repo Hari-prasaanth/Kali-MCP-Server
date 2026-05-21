@@ -2,7 +2,25 @@
 
 MCP server that exposes Kali Linux pentesting tools to AI assistants (VS Code + GitHub Copilot) over stdio/SSH.
 
-## Tools
+## Why This Over Others?
+
+The most popular Kali MCP server ([Wh0am123/MCP-Kali-Server](https://github.com/Wh0am123/MCP-Kali-Server)) exposes ~10 tools via an HTTP API and requires a separate client + SSH tunnel setup. Here's how we compare:
+
+| Feature | MCP-Kali-Server (popular) | This Server |
+|---------|--------------------------|-------------|
+| Dedicated tool wrappers | 10 | **27** |
+| Transport | HTTP API + SSH tunnel | **Native stdio over SSH** (zero config) |
+| Input sanitization | Basic | **Regex validation + shlex escaping** |
+| Timeout handling | None | **Per-tool configurable + process group kill** |
+| Output management | Raw | **100KB cap with truncation notice** |
+| Setup complexity | venv + client + server + tunnel | **Single `install.sh`, one mcp.json entry** |
+| XSS/Command Injection tools | None | **XSStrike, Dalfox, Commix** |
+| Fuzzing tools | None | **ffuf, Feroxbuster, Arjun** |
+| Password cracking | John only | **John + Hashcat** |
+| Vuln scanning | None | **Nuclei, SSLScan, wafw00f** |
+| Recon/OSINT | None | **Subfinder, WhatWeb, Searchsploit** |
+
+## Tools (27 MCP Tools)
 
 | Category | Tools |
 |----------|-------|
